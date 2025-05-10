@@ -2,7 +2,7 @@
   <div class="app">
     <esim-header />
     <main class="main">
-      <breadcrumbs :items="breadcrumbItems" />
+      <breadcrumbs :items="BREADCRUMB_ITEMS" />
       <div class="main__content container">
         <img class="main__image" src="/images/phone-shield.png" alt="">
         <div class="main__info">
@@ -12,7 +12,7 @@
               eSIM Europe + VPN
             </h1>
           </div>
-          <features-tabs :features="features" :tabs="tabs" />
+          <features-tabs :features="FEATURES" :tabs="TABS" />
           <subscribe-option :options="options" />
           <buy-button />
         </div>
@@ -23,7 +23,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { BREADCRUMB_ITEMS } from '@/constants/breadcrumbs'
+import { TABS } from '@/constants/tabs'
+import { FEATURES } from '@/constants/features'
+import { useSubscription } from '@/composables/useSubscription'
 import EsimHeader from '@/components/EsimHeader.vue'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import FeaturesTabs from '@/components/FeaturesTabs.vue'
@@ -32,111 +36,7 @@ import BuyButton from '@/components/BuyButton.vue'
 import EsimFooter from '@/components/EsimFooter.vue'
 import ContactButton from '@/components/ContactButton.vue'
 
-export default {
-  name: 'App',
-  components: {
-    EsimHeader,
-    Breadcrumbs,
-    FeaturesTabs,
-    SubscribeOption,
-    BuyButton,
-    EsimFooter,
-    ContactButton
-  },
-  data() {
-    return {
-      breadcrumbItems: [
-        'Home',
-        'Region',
-        'Europe'
-      ],
-      tabs: [
-        { id: 'features', text: 'Features', active: true },
-        { id: 'tech-specs', text: 'Tech specs', active: false }
-      ],
-      features: [
-        '33 countries',
-        'Reliable connection from best networks.',
-        'You will only get mobile data and keep your original phone number.',
-        'Works with all smartphones with eSIM technology.'
-      ],
-      options: [
-        {
-          id: 1,
-          dataAmount: '500 MB',
-          dataType: 'eSIM',
-          dataDuration: '7 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '7 days VPN',
-          price: '$ 10.00',
-          originalPrice: null,
-          discount: null,
-          selected: true
-        },
-        {
-          id: 2,
-          dataAmount: '1 GB',
-          dataType: 'eSIM',
-          dataDuration: '30 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '30 days VPN',
-          price: '$ 20.00',
-          originalPrice: null,
-          discount: null,
-          selected: false
-        },
-        {
-          id: 3,
-          dataAmount: '3 GB',
-          dataType: 'eSIM',
-          dataDuration: '30 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '30 days VPN',
-          price: '$ 30.00',
-          originalPrice: null,
-          discount: null,
-          selected: false
-        },
-        {
-          id: 4,
-          dataAmount: '5 GB',
-          dataType: 'eSIM',
-          dataDuration: '7 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '6 months VPN',
-          price: '$ 42.12',
-          originalPrice: '$ 50.00',
-          discount: 50,
-          selected: false
-        },
-        {
-          id: 5,
-          dataAmount: '10 GB',
-          dataType: 'eSIM',
-          dataDuration: '60 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '6 months VPN',
-          price: '$ 51.03',
-          originalPrice: '$ 60.00',
-          discount: 50,
-          selected: false
-        },
-        {
-          id: 6,
-          dataAmount: '20 GB',
-          dataType: 'eSIM',
-          dataDuration: '60 days',
-          vpnAmount: '∞ GB',
-          vpnDuration: '1 year VPN',
-          price: '$ 80.00',
-          originalPrice: null,
-          discount: null,
-          selected: false
-        }
-      ]
-    }
-  }
-}
+const { options } = useSubscription()
 </script>
 
 <style lang="scss">

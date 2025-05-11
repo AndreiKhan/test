@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ContactPopup from './popup/ContactPopup.vue';
+import ContactPopup from '@/components/popup/ContactPopup.vue';
 
 export default {
   name: 'ContactButton',
